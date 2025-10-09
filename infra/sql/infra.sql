@@ -137,3 +137,17 @@ VALUES
 (2, 3, '2024-09-11', '2024-09-25', 'Em andamento'),
 (4, 5, '2024-09-11', '2024-09-25', 'Em andamento'),
 (6, 2, '2024-09-11', '2024-09-25', 'Em andamento');
+
+
+INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
+VALUES
+(1, 2, '2024-10-01', '2024-10-15', 'Em andamento'),
+(2, 3, '2024-10-02', '2024-10-16', 'Em andamento'),
+(3, 4, '2024-10-03', '2024-10-17', 'Em andamento'),
+(4, 5, '2024-10-04', '2024-10-18', 'Em andamento'),
+(5, 6, '2024-10-05', '2024-10-19', 'Em andamento'),
+(6, 7, '2024-10-06', '2024-10-20', 'Em andamento'),
+(7, 8, '2024-10-07', '2024-10-21', 'Em andamento'),
+(8, 9, '2024-10-08', '2024-10-22', 'Em andamento'),
+(9, 10, '2024-10-09', '2024-10-23', 'Em andamento'),
+(10, 1, '2024-10-10', '2024-10-24', 'Em andamento');
