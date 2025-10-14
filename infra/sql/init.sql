@@ -101,7 +101,7 @@ VALUES
 ('Tudo é Rio', 'Carla Madeira', 'Record', '2014', '978-8501119599', 4, 4, 70.00, 'Disponível');
 
 
- Emprestimos
+-- Emprestimos
 INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
 VALUES 
 (1, 2, '2024-09-01', '2024-09-15', 'Em andamento'),
