@@ -122,13 +122,13 @@ VALUES
 
 INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
 VALUES
-(15, 11, '2025-01-10', '2025-02-10', 'Em andamento'),   -- Alexandre pegou "É Assim que Acaba"
-(13, 17, '2025-02-09', '2025-03-09', 'Em andamento'),   -- Thiago pegou "Antes Que o Café Esfrie"
-(19, 13, '2025-03-08', '2025-04-08', 'Em andamento'),   -- Alice pegou "A Cinco Passos de Você"
-(11, 20, '2025-04-07', '2025-05-07', 'Em andamento'),  -- Carla pegou "Tudo é Rio"
-(18, 14, '2025-05-06', '2025-06-06', 'Em andamento'),   -- Elias pegou "Os Sete Maridos de Evelyn Hugo"
-(20, 12, '2025-06-05', '2025-07-05', 'Em andamento'),  -- Levi pegou "Verity"
-(16, 15, '2025-07-04', '2025-08-04', 'Em andamento'),   -- Marcos pegou "Malibu Renasce"
-(17, 18, '2025-08-03', '2025-09-03', 'Em andamento'),   -- Renan pegou "A Biblioteca da Meia-Noite"
-(12, 16, '2025-09-02', '2025-10-02', 'Em andamento'),   -- Ruan pegou "A Paciente Silenciosa"
-(14, 19, '2025-10-01', '2025-11-01', 'Em andamento');   -- Isabel pegou "Teto Para Dois"
+(15, 11, '2025-01-10', '2025-02-10', 'Em andamento'), 
+(13, 17, '2025-02-09', '2025-03-09', 'Em andamento'),   
+(19, 13, '2025-03-08', '2025-04-08', 'Em andamento'),   
+(11, 20, '2025-04-07', '2025-05-07', 'Em andamento'),  
+(18, 14, '2025-05-06', '2025-06-06', 'Em andamento'),   
+(20, 12, '2025-06-05', '2025-07-05', 'Em andamento'),  
+(16, 15, '2025-07-04', '2025-08-04', 'Em andamento'),  
+(17, 18, '2025-08-03', '2025-09-03', 'Em andamento'),   
+(12, 16, '2025-09-02', '2025-10-02', 'Em andamento'),   
+(14, 19, '2025-10-01', '2025-11-01', 'Em andamento');   
