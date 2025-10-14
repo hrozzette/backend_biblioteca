@@ -1,4 +1,3 @@
-
 CREATE SEQUENCE seq_ra START 1;
 
 CREATE TABLE Aluno (
@@ -102,7 +101,7 @@ VALUES
 ('Tudo é Rio', 'Carla Madeira', 'Record', '2014', '978-8501119599', 4, 4, 70.00, 'Disponível');
 
 
--- Inserindo Emprestimos
+ Emprestimos
 INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
 VALUES 
 (1, 2, '2024-09-01', '2024-09-15', 'Em andamento'),
@@ -121,33 +120,15 @@ VALUES
 (6, 2, '2024-09-11', '2024-09-25', 'Em andamento');
 
 
-INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo) 
-VALUES
-(1, 2, '2024-09-01', '2024-09-15', 'Em andamento'),
-(2, 1, '2024-09-02', '2024-09-16', 'Em andamento'),
-(3, 5, '2024-09-03', '2024-09-17', 'Em andamento'),
-(5, 3, '2024-09-04', '2024-09-18', 'Em andamento'),
-(4, 6, '2024-09-05', '2024-09-19', 'Em andamento'),
-(6, 4, '2024-09-06', '2024-09-20', 'Em andamento'),
-(7, 8, '2024-09-07', '2024-09-21', 'Em andamento'),
-(8, 7, '2024-09-08', '2024-09-22', 'Em andamento'),
-(10, 9, '2024-09-09', '2024-09-23', 'Em andamento'),
-(9, 10, '2024-09-10', '2024-09-24', 'Em andamento'),
-(1, 10, '2024-09-11', '2024-09-25', 'Em andamento'),
-(2, 3, '2024-09-11', '2024-09-25', 'Em andamento'),
-(4, 5, '2024-09-11', '2024-09-25', 'Em andamento'),
-(6, 2, '2024-09-11', '2024-09-25', 'Em andamento');
-
-
 INSERT INTO Emprestimo (id_aluno, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
 VALUES
-(1, 2, '2025-01-10', '2025-02-10', 'Em andamento'),
-(2, 3, '2025-02-09', '2025-03-09', 'Em andamento'),
-(3, 4, '2025-03-08', '2025-04-08', 'Em andamento'),
-(4, 5, '2025-04-07', '2025-05-07', 'Em andamento'),
-(5, 6, '2025-05-06', '2025-06-06', 'Em andamento'),
-(6, 7, '2025-06-05', '2025-07-05', 'Em andamento'),
-(7, 8, '2025-07-04', '2025-08-04', 'Em andamento'),
-(8, 9, '2025-08-03', '2025-09-03', 'Em andamento'),
-(9, 10, '2025-09-02', '2025-10-02', 'Em andamento'),
-(10, 1, '2025-10-01', '2025-11-01', 'Em andamento');
+(15, 11, '2025-01-10', '2025-02-10', 'Em andamento'),   -- Alexandre pegou "É Assim que Acaba"
+(13, 17, '2025-02-09', '2025-03-09', 'Em andamento'),   -- Thiago pegou "Antes Que o Café Esfrie"
+(19, 13, '2025-03-08', '2025-04-08', 'Em andamento'),   -- Alice pegou "A Cinco Passos de Você"
+(11, 20, '2025-04-07', '2025-05-07', 'Em andamento'),  -- Carla pegou "Tudo é Rio"
+(18, 14, '2025-05-06', '2025-06-06', 'Em andamento'),   -- Elias pegou "Os Sete Maridos de Evelyn Hugo"
+(20, 12, '2025-06-05', '2025-07-05', 'Em andamento'),  -- Levi pegou "Verity"
+(16, 15, '2025-07-04', '2025-08-04', 'Em andamento'),   -- Marcos pegou "Malibu Renasce"
+(17, 18, '2025-08-03', '2025-09-03', 'Em andamento'),   -- Renan pegou "A Biblioteca da Meia-Noite"
+(12, 16, '2025-09-02', '2025-10-02', 'Em andamento'),   -- Ruan pegou "A Paciente Silenciosa"
+(14, 19, '2025-10-01', '2025-11-01', 'Em andamento');   -- Isabel pegou "Teto Para Dois"
