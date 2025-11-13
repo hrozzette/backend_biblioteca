@@ -1,3 +1,7 @@
+import DatabaseModel from "./DatabaseModel.js";
+
+const database = new DatabaseModel().pool; 
+
 class Livro {
   private id_livro: number;
   private titulo: string;
@@ -114,6 +118,52 @@ class Livro {
   public setStatusLivroEmprestado(status_livro_emprestado: string): void {
     this.status_livro_emprestado = status_livro_emprestado;
   }
+
+  static async listarLivros(): Promise<Array<Livro> | null> {
+  try {
+    
+    let listaDeLivros: Array<Livro> = [];
+
+    
+    const querySelectLivros = `SELECT * FROM livro;`;
+
+    
+    const respostaBD = await database.query(querySelectLivros);
+
+    
+    respostaBD.rows.forEach((LivroBD) => {
+      
+      const novoLivro: Livro = new Livro(
+        LivroBD.id_livro
+        LivroBD.titulo,
+        LivroBD.autor,
+        LivroBD.editora,
+        LivroBD.ano_publicacao,
+        LivroBD.isbn,
+        LivroBD.quant_total,
+        LivroBD.quant_disponivel,
+        LivroBD.valor_aquisicao,
+        LivroBD.status_livro_emprestado
+      );
+
+      // Define o ID do livro usando o valor retornado do banco
+      novoLivro.setIdLivro(LivroBD.id_livro);
+
+     
+      listaDeLivros.push(novoLivro);
+    });
+
+  
+    return listaDeLivros;
+  } catch (error) {
+    
+    console.error(`Erro na consulta ao banco de dados. ${error}`);
+
+    
+    return null;
+  }
+}
+
 }
 
 export default Livro;

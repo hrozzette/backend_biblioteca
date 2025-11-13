@@ -1,5 +1,9 @@
+import DatabaseModel from "./DatabaseModel.js";
+
+const database = new DatabaseModel().pool; // Inicializa o pool de conexões com o banco de dados
+
 class Aluno {
-  private id_aluno: number;
+  private id_aluno: number = 0;
   private ra: string;
   private nome: string;
   private sobrenome: string;
@@ -9,7 +13,6 @@ class Aluno {
   private celular: string;
 
   constructor(
-    _id_aluno: number,
     _ra: string,
     _nome: string,
     _sobrenome: string,
@@ -18,7 +21,6 @@ class Aluno {
     _email: string,
    _celular: string
   ) {
-    this.id_aluno = _id_aluno;
     this.ra = _ra;
     this.nome = _nome;
     this.sobrenome = _sobrenome;
@@ -91,6 +93,48 @@ class Aluno {
   public setCelular(celular: string): void {
     this.celular = celular;
   }
+
+    static async listarAlunos(): Promise<Array<Aluno> | null> {
+        try {
+            // Cria uma lista vazia que irá armazenar os objetos do tipo Cliente
+            let listaDeAlunos: Array<Aluno> = [];
+
+            // Define a consulta SQL que irá buscar todos os registros da tabela 'clientes'
+            const querySelectAlunos = `SELECT * FROM aluno;`;
+
+            // Executa a consulta no banco de dados e aguarda a resposta
+            const respostaBD = await database.query(querySelectAlunos);
+
+            // Percorre cada linha retornada pela consulta
+            respostaBD.rows.forEach((AlunoBD) => {
+                // Cria um novo objeto Cliente usando os dados da linha atual (nome, cpf, telefone)
+                const novoAluno: Aluno = new Aluno(
+                  AlunoBD.ra,
+                  AlunoBD.nome,
+                  AlunoBD.sobrenome,
+                  AlunoBD.data_nascimento,
+                  AlunoBD.endereço,
+                  AlunoBD.email,
+                  AlunoBD.celular             
+                );
+
+                // Define o ID do cliente usando o valor retornado do banco
+                novoAluno.setIdAluno(AlunoBD.id_cliente);
+
+                // Adiciona o novo cliente à lista de clientes
+                listaDeAlunos.push(novoAluno);
+            });
+
+            // Retorna a lista completa de clientes
+            return listaDeAlunos;
+        } catch (error) {
+            // Em caso de erro na execução da consulta, exibe uma mensagem no console
+            console.error(`Erro na consulta ao banco de dados. ${error}`);
+
+            // Retorna null para indicar que houve uma falha na operação
+            return null;
+        }
+    }
 }
 
 export default Aluno;
