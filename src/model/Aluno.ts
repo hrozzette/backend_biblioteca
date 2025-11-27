@@ -1,140 +1,207 @@
-import DatabaseModel from "./DatabaseModel.js";
+import type { AlunoDTO } from "../interface/AlunoDTO.js";
+import DataBaseModel from "./DatabaseModel.js";
 
-const database = new DatabaseModel().pool; // Inicializa o pool de conexões com o banco de dados
+const database = new DataBaseModel().pool;
 
 class Aluno {
-  private id_aluno: number = 0;
-  private ra: string;
+  private idAluno: number = 0;
   private nome: string;
   private sobrenome: string;
-  private data_nascimento: Date;
-  private endereco: string;
-  private email: string;
+  private ra: number;
+  private dataNascimento: Date;
   private celular: string;
+  private email: string;
+  private endereco: string;
 
+  /**
+   * Construtor da classe Aluno
+   * @param _nome Nome do Aluno
+   * @param _cpf CPF do Aluno
+   * @param _celular Telefone do Aluno
+   * @param _email Email do Aluno
+   * @param _endereco Endereco do Aluno
+   */
   constructor(
-    _ra: string,
     _nome: string,
     _sobrenome: string,
-    _data_nascimento: Date,
-   _endereco: string,
+    _ra: number,
+    _dataNascimento: Date,
+    _celular: string,
     _email: string,
-   _celular: string
+    _endereco: string
   ) {
-    this.ra = _ra;
     this.nome = _nome;
     this.sobrenome = _sobrenome;
-    this.data_nascimento = _data_nascimento;
-    this.endereco = _endereco;
-    this.email = _email;
+    this.ra = _ra;
+    this.dataNascimento = _dataNascimento;
     this.celular = _celular;
+    this.email = _email;
+    this.endereco = _endereco;
   }
 
- public getIdAluno(): number {
-    return this.id_aluno;
+  public getIdAluno(): number {
+    return this.idAluno;
   }
 
-  public getRa(): string {
-    return this.ra;
+  public setIdAluno(idAluno: number): void {
+    this.idAluno = idAluno;
   }
 
   public getNome(): string {
     return this.nome;
   }
 
-  public getSobrenome(): string {
-    return this.sobrenome;
-  }
-
-  public getNascimentoData(): Date {
-    return this.data_nascimento;
-  }
-
-  public getEndereco(): string {
-    return this.endereco;
-  }
-
-  public getEmail(): string {
-    return this.email;
-  }
-
-  public getCelular(): string {
-    return this.celular;
-  }
-
-  public setIdAluno(id_aluno: number): void {
-    this.id_aluno = id_aluno;
-  }
-
-  public setRa(ra: string): void {
-    this.ra = ra;
-  }
-
   public setNome(nome: string): void {
     this.nome = nome;
+  }
+
+  public getSobrenome(): string {
+    return this.sobrenome;
   }
 
   public setSobrenome(sobrenome: string): void {
     this.sobrenome = sobrenome;
   }
 
-  public setNascimentoData(data_nascimento: Date): void {
-    this.data_nascimento = data_nascimento;
+  public getra(): number {
+    return this.ra;
   }
 
-  public setEndereco(endereco: string): void {
-    this.endereco = endereco;
+  public setra(ra: number): number {
+    return (this.ra = ra);
   }
 
-  public setEmail(email: string): void {
+  public getdataNascimento(): Date {
+    return this.dataNascimento;
+  }
+
+  public setdataNascimento(dataNascimento: Date): void {
+    this.dataNascimento = dataNascimento;
+  }
+
+  public getemail(): string {
+    return this.email;
+  }
+
+  public setemail(email: string): void {
     this.email = email;
   }
 
-  public setCelular(celular: string): void {
+  public getendereco(): string {
+    return this.endereco;
+  }
+
+  public setendereco(endereco: string): void {
+    this.endereco = endereco;
+  }
+
+  public getcelular(): string {
+    return this.celular;
+  }
+
+  public setcelular(celular: string): void {
     this.celular = celular;
   }
 
-    static async listarAlunos(): Promise<Array<Aluno> | null> {
-        try {
-            // Cria uma lista vazia que irá armazenar os objetos do tipo Cliente
-            let listaDeAlunos: Array<Aluno> = [];
+  static async listarAlunos(): Promise<Array<Aluno> | null> {
+    try {
+      let listaDeAlunos: Array<Aluno> = [];
 
-            // Define a consulta SQL que irá buscar todos os registros da tabela 'clientes'
-            const querySelectAlunos = `SELECT * FROM aluno;`;
+      const querySelectAlunos = `SELECT * FROM Aluno;`;
 
-            // Executa a consulta no banco de dados e aguarda a resposta
-            const respostaBD = await database.query(querySelectAlunos);
+      const respostaBD = await database.query(querySelectAlunos);
 
-            // Percorre cada linha retornada pela consulta
-            respostaBD.rows.forEach((AlunoBD) => {
-                // Cria um novo objeto Cliente usando os dados da linha atual (nome, cpf, telefone)
-                const novoAluno: Aluno = new Aluno(
-                  AlunoBD.ra,
-                  AlunoBD.nome,
-                  AlunoBD.sobrenome,
-                  AlunoBD.data_nascimento,
-                  AlunoBD.endereço,
-                  AlunoBD.email,
-                  AlunoBD.celular             
-                );
+      respostaBD.rows.forEach((AlunoBD: any) => {
+        const novoAluno: Aluno = new Aluno(
+          AlunoBD.nome,
+          AlunoBD.sobrenome,
+          AlunoBD.ra,
+          AlunoBD.data_nascimento,
+          AlunoBD.celular,
+          AlunoBD.email,
+          AlunoBD.endereco
+        );
 
-                // Define o ID do cliente usando o valor retornado do banco
-                novoAluno.setIdAluno(AlunoBD.id_cliente);
+        novoAluno.setIdAluno(AlunoBD.id_Aluno);
 
-                // Adiciona o novo cliente à lista de clientes
-                listaDeAlunos.push(novoAluno);
-            });
+        listaDeAlunos.push(novoAluno);
+      });
 
-            // Retorna a lista completa de clientes
-            return listaDeAlunos;
-        } catch (error) {
-            // Em caso de erro na execução da consulta, exibe uma mensagem no console
-            console.error(`Erro na consulta ao banco de dados. ${error}`);
+      return listaDeAlunos;
+    } catch (error) {
+      console.error(`Erro na consulta ao banco de dados. ${error}`);
 
-            // Retorna null para indicar que houve uma falha na operação
-            return null;
-        }
+      return null;
     }
+  }
+
+  static async cadastrarAluno(aluno: AlunoDTO): Promise<boolean> {
+    /*{
+  "nome": "Ricardo",
+  "sobrenome": "Cardoso",
+  "data_nascimento": "1995-03-14",
+  "endereco": "Rua General Osório, 165",
+  "email": "ricardo_cardoso@usp.br",
+  "celular": "67986786153"
+  */
+    try {
+      const queryInsertAluno = `INSERT INTO Aluno (nome, sobrenome, data_nascimento, endereco, email, celular)
+                                VALUES
+                                ($1, $2, $3, $4, $5, $6)
+                                RETURNING id_Aluno;`;
+
+      const respostaBD = await database.query(queryInsertAluno, [
+        aluno.nome.toUpperCase(),
+        aluno.sobrenome.toUpperCase(),
+        aluno.dataNascimento,
+        aluno.endereco,
+        aluno.email,
+        aluno.celular,
+      ]);
+
+      if (respostaBD.rows.length > 0) {
+        console.info(
+          `Aluno cadastrado com sucesso. ID: ${respostaBD.rows[0].id_Aluno}`
+        );
+
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error(`Erro na consulta ao banco de dados. ${error}`);
+
+      return false;
+    }
+  }
+
+  static async listarAluno(idAluno: number): Promise<Aluno | null> {
+    try {
+      const querySelectAluno = `SELECT * FROM Alunos WHERE id_Aluno=$1;`;
+
+      const respostaBD = await database.query(querySelectAluno, [idAluno]);
+
+      if (respostaBD.rowCount !== 0) {
+        const aluno: Aluno = new Aluno(
+          respostaBD.rows[0].nome,
+          respostaBD.rows[0].sobrenome,
+          respostaBD.rows[0].ra,
+          respostaBD.rows[0].dataNascimento,
+          respostaBD.rows[0].celular,
+          respostaBD.rows[0].email,
+          respostaBD.rows[0].endereco
+        );
+        aluno.setIdAluno(respostaBD.rows[0].id_Aluno);
+
+        return aluno;
+      }
+
+      return null;
+    } catch (error) {
+      console.error(`Erro ao buscar Aluno no banco de dados. ${error}`);
+      return null;
+    }
+  }
 }
 
 export default Aluno;
